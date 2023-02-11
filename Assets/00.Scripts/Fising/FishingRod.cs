@@ -67,6 +67,19 @@ public class FishingRod : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+            //장애물
+            collision.GetComponent<ObjectInfo>().informationGet();
+
+            Destroy(collision.gameObject);
+        }
+        else if (collision.gameObject.CompareTag("Fish"))
+        {
+            //물고기
+            collision.GetComponent<ObjectInfo>().informationGet();
+
+            Destroy(collision.gameObject);
+        }
     }
 }
