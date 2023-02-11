@@ -15,16 +15,14 @@ public class FishingBackground : MonoBehaviour
     void Update()
     {
         moveVertical();
+        ChangeSpeed(.1f * Time.deltaTime);
     }
 
 
 
-    public void ChangeSpeed(bool isGettingFast)
+    public void ChangeSpeed(float speed)
     {
-        if (isGettingFast)
-        { }//drownPow=
-        else
-        { }//drownPow=
+        drownPow += speed;
     }
     public void moveVertical()
     {
@@ -34,6 +32,11 @@ public class FishingBackground : MonoBehaviour
     {
 
     }
-
+    public float Stop()
+    {
+        float i = drownPow;
+        drownPow = .2f;
+        return i;
+    }
 
 }

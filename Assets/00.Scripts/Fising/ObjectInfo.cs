@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ObjectInfo : MonoBehaviour
 {
-    int iiint;
+    [SerializeField] int iiint;
     public int informationGet()
     {
         return iiint;

@@ -1,17 +1,22 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class FishingRod : MonoBehaviour
 {
     [SerializeField] float mSpeed, currentVelocity, MaxVelocity; [Space]
-    [SerializeField] float LimitLength;
+    [SerializeField] float LimitLength; [Space]
+    [SerializeField] float VelLoad;
     Rigidbody2D rigid;
+    FishingBackground background;
     // Start is called before the first frame update
     void Start()
     {
         rigid = GetComponent<Rigidbody2D>();
+        background = FindFirstObjectByType<FishingBackground>();
     }
 
     // Update is called once per frame
@@ -70,16 +75,27 @@ public class FishingRod : MonoBehaviour
         if (collision.gameObject.CompareTag("Enemy"))
         {
             //장애물
-            collision.GetComponent<ObjectInfo>().informationGet();
+            GameManager.Instance.RodDurability -= collision.GetComponent<ObjectInfo>().informationGet();
+            VelLoad = background.Stop();
+            StartCoroutine(recover());
 
             Destroy(collision.gameObject);
         }
         else if (collision.gameObject.CompareTag("Fish"))
         {
             //물고기
-            collision.GetComponent<ObjectInfo>().informationGet();
+            GameManager.Instance.Score += collision.GetComponent<ObjectInfo>().informationGet();
 
             Destroy(collision.gameObject);
         }
+    }
+    IEnumerator recover()
+    {
+        yield return new WaitForSeconds(0.1f);
+        background.ChangeSpeed(VelLoad * .1f);
+        yield return new WaitForSeconds(0.2f);
+        background.ChangeSpeed(VelLoad * .3f);
+        yield return new WaitForSeconds(0.2f);
+        background.ChangeSpeed(VelLoad * .5f);
     }
 }
