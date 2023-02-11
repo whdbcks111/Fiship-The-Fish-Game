@@ -8,7 +8,7 @@ public class FishingBackground : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
-        GetComponent<FishingObstacleGenerate>().Generate();
+        //GetComponent<FishingObstacleGenerate>().Generate();
 
     }
     // Update is called once per frame
