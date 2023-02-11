@@ -6,6 +6,6 @@ using UnityEngine.SceneManagement;
 public class StartManager : MonoBehaviour
 {
     private void Start() {
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene("ShipScene");
     }
 }

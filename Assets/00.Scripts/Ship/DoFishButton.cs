@@ -6,6 +6,6 @@ using UnityEngine.SceneManagement;
 public class DoFishButton : MonoBehaviour
 {
     public void Fish() {
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene("Fishing");
     }
 }
