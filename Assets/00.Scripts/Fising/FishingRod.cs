@@ -75,7 +75,7 @@ public class FishingRod : MonoBehaviour
         if (collision.gameObject.CompareTag("Enemy"))
         {
             //장애물
-            collision.GetComponent<ObjectInfo>().informationGet();
+            GameManager.Instance.RodDurability -= collision.GetComponent<ObjectInfo>().informationGet();
             VelLoad = background.Stop();
             StartCoroutine(recover());
 
@@ -84,14 +84,18 @@ public class FishingRod : MonoBehaviour
         else if (collision.gameObject.CompareTag("Fish"))
         {
             //물고기
-            collision.GetComponent<ObjectInfo>().informationGet();
+            GameManager.Instance.Score += collision.GetComponent<ObjectInfo>().informationGet();
 
             Destroy(collision.gameObject);
         }
     }
     IEnumerator recover()
     {
-        yield return new WaitForSeconds(0.3f);
-        background.ChangeSpeed(VelLoad * .7f);
+        yield return new WaitForSeconds(0.1f);
+        background.ChangeSpeed(VelLoad * .1f);
+        yield return new WaitForSeconds(0.2f);
+        background.ChangeSpeed(VelLoad * .3f);
+        yield return new WaitForSeconds(0.2f);
+        background.ChangeSpeed(VelLoad * .5f);
     }
 }

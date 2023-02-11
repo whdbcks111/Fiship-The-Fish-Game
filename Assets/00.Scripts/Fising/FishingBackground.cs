@@ -15,14 +15,14 @@ public class FishingBackground : MonoBehaviour
     void Update()
     {
         moveVertical();
-        ChangeSpeed(.1f);
+        ChangeSpeed(.1f * Time.deltaTime);
     }
 
 
 
     public void ChangeSpeed(float speed)
     {
-        drownPow += speed * Time.deltaTime;
+        drownPow += speed;
     }
     public void moveVertical()
     {
