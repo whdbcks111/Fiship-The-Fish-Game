@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -17,7 +17,7 @@ public class FishingRod : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        rigid.velocity = rigid.velocity * 0.99f;
+        rigid.velocity = rigid.velocity * 0.997f;
 
         currentVelocity = rigid.velocity.x;
 
