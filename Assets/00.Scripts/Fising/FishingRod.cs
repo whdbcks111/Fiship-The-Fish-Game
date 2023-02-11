@@ -1,8 +1,8 @@
- using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FishingRoad : MonoBehaviour
+public class FishingRod : MonoBehaviour
 {
     [SerializeField] float mSpeed;
     Rigidbody2D rigid;

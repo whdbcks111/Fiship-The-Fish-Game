@@ -6,6 +6,18 @@ public class FishingBackground : MonoBehaviour
 {
     [SerializeField] float drownPow;
     // Start is called before the first frame update
+    private void Start()
+    {
+        GetComponent<FishingObstacleGenerate>().Generate();
+
+    }
+    // Update is called once per frame
+    void Update()
+    {
+        moveVertical();
+    }
+
+
 
     public void ChangeSpeed(bool isGettingFast)
     {
@@ -16,13 +28,12 @@ public class FishingBackground : MonoBehaviour
     }
     public void moveVertical()
     {
-        transform.Translate(new Vector2(0, drownPow));
+        transform.Translate(new Vector2(0, drownPow) * Time.deltaTime);
     }
-
-
-    // Update is called once per frame
-    void Update()
+    public void ChangeSprite()
     {
-        moveVertical();
+
     }
+
+
 }
