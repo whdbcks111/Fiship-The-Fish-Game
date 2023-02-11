@@ -402,7 +402,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e460fb77f4e9ed2498cd76958e6e2541, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  drownPow: 3
+  drownPow: 2
+  background: {fileID: 0}
 --- !u!114 &107433410
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1256,6 +1257,8 @@ MonoBehaviour:
   currentVelocity: 0
   MaxVelocity: 1.5
   LimitLength: 2.5
+  VelLoad: 0
+  _generator: {fileID: 107433410}
 --- !u!212 &1747600569
 SpriteRenderer:
   m_ObjectHideFlags: 0

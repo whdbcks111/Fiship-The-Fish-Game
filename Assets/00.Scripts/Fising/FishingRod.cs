@@ -12,6 +12,7 @@ public class FishingRod : MonoBehaviour
     [SerializeField] float VelLoad;
     Rigidbody2D rigid;
     FishingBackground background;
+    [SerializeField] FishingObstacleGenerate _generator;
     // Start is called before the first frame update
     void Start()
     {
@@ -79,7 +80,8 @@ public class FishingRod : MonoBehaviour
             VelLoad = background.Stop();
             StartCoroutine(recover());
 
-            Destroy(collision.gameObject);
+
+            _generator.DespawnObstacle(collision.gameObject);
         }
         else if (collision.gameObject.CompareTag("Fish"))
         {

@@ -5,6 +5,7 @@ using UnityEngine;
 public class FishingBackground : MonoBehaviour
 {
     [SerializeField] float drownPow;
+    [SerializeField] GameObject background;
     // Start is called before the first frame update
     private void Start()
     {
@@ -28,7 +29,7 @@ public class FishingBackground : MonoBehaviour
     {
         transform.Translate(new Vector2(0, drownPow) * Time.deltaTime);
     }
-    public void ChangeSprite()
+    public void GenerateSprite()
     {
 
     }
