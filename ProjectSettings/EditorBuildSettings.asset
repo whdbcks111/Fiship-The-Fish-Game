@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/01.Scenes/ShipScene.unity
     guid: db6abfc92d497d84cae2a96bd5850d18
+  - enabled: 1
+    path: Assets/01.Scenes/GameOverScene.unity
+    guid: 9f70a9bf3973ba3439ef325480cd29ad
   m_configObjects: {}
