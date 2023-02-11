@@ -1,4 +1,4 @@
-using System.Collections;
+Ôªøusing System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -17,7 +17,7 @@ public class FishingRod : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        rigid.velocity = rigid.velocity * 0.99f;
+        rigid.velocity = rigid.velocity * 0.997f;
 
         currentVelocity = rigid.velocity.x;
 
@@ -67,7 +67,7 @@ public class FishingRod : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        //≥ª±∏µµ ∞¸∑√ √≥∏Æ
+        //ÎÇ¥Íµ¨ÎèÑ Í¥ÄÎ†® Ï≤òÎ¶¨
         
     }
 }
