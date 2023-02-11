@@ -30,7 +30,7 @@ public class FishingRod : MonoBehaviour
     }
     public void MoveHorizontal(bool isRight)
     {
-        print("move horizontal");
+        //'print("move horizontal");
 
         int I = 0;
         if (isRight)
@@ -68,5 +68,6 @@ public class FishingRod : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         //郴备档 包访 贸府
+        
     }
 }
