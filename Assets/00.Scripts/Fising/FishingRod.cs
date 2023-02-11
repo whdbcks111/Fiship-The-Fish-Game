@@ -67,7 +67,6 @@ public class FishingRod : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        //내구도 관련 처리
         
     }
 }
