@@ -67,7 +67,6 @@ public class FishingRod : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        //郴备档 包访 贸府
         
     }
 }
