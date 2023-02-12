@@ -18,7 +18,9 @@ public class ShipSceneManager : MonoBehaviour
         var cost = GameManager.instance.GetCost();
         if(GameManager.instance.Point >= cost) {
             GameManager.instance.Point -= cost;
+            var beforeMaxDur = GameManager.instance.MaxRodDurability;
             GameManager.instance.EnhanceLevel++;
+            GameManager.instance.RodDurability += GameManager.instance.MaxRodDurability - beforeMaxDur;
         }
     }
 }

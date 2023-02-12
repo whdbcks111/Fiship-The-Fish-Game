@@ -12,6 +12,8 @@ public class FishingManager : MonoBehaviour
     [SerializeField] private float _fishChance;
     [SerializeField] private float _obstacleSpan;
     [SerializeField] private float _obstacleChance;
+    [SerializeField] private GameObject _oceanLoop1, _oceanLoop2;
+
     private float _fishTimer = 0;
     private float _obstacleTimer = 0;
 
@@ -37,6 +39,19 @@ public class FishingManager : MonoBehaviour
             _fishTimer += _fishSpan;
             if (Random.value < _fishChance)
                 fishGenerator.Generate(1, 0.3f);
+        }
+
+        var topOcean = _oceanLoop1.transform.position.y > _oceanLoop2.transform.position.y ?
+            _oceanLoop1 : _oceanLoop2;
+        var bottomOcean = topOcean == _oceanLoop1 ? _oceanLoop2 : _oceanLoop1;
+        var span = topOcean.transform.position.y - bottomOcean.transform.position.y;
+        var screenBottom = ScreenRect.rightBottom.y;
+
+        if(screenBottom < bottomOcean.transform.position.y + 1 - span * 0.5f)
+        {
+            var pos = topOcean.transform.position;
+            pos.y -= span * 2;
+            topOcean.transform.position = pos;
         }
     }
 }
