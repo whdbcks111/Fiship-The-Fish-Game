@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: -8910319237814819736}
   - component: {fileID: 2650784713882536360}
   - component: {fileID: 7753632761560689671}
+  - component: {fileID: 2664270973343331574}
   m_Layer: 0
   m_Name: squid1000
   m_TagString: Fish
@@ -155,3 +156,15 @@ CapsuleCollider2D:
   m_Offset: {x: -0.024666578, y: 0.14860576}
   m_Size: {x: 0.4403003, y: 1.1087109}
   m_Direction: 0
+--- !u!114 &2664270973343331574
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5997402004711486779}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1fd9126ce5a9ef34c97af8749e29740c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

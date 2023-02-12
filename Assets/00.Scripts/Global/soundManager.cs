@@ -1,19 +1,42 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
-public class soundManager : MonoBehaviour
+public class SoundManager : MonoBehaviour
 {
+
+    public static SoundManager instance;
+
+    [SerializeField] private AudioSource _bgm;
     [SerializeField] private List<AudioClip> clips;
-    private AudioSource source;
+
+    private AudioSource _source;
+    private float _originalVol;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-        source = GetComponent<AudioSource>();
+        instance = this;
+        _source = GetComponent<AudioSource>();
+        _originalVol = _source.volume;
     }
 
-    public void PlayAudio(int code)
+    void Update()
     {
-        source.PlayOneShot(clips[code]);
+        var curScene = SceneManager.GetActiveScene();
+        if (curScene.name == "GameOverScene" && _bgm.isPlaying) _bgm.Stop();
+        else if (!_bgm.isPlaying) _bgm.Play();
+    }
+
+    public void PlayAudio(string name, float vol = .4f)
+    {
+        foreach(AudioClip clip in clips)
+        {
+            if (clip.name == name)
+            {
+                _source.PlayOneShot(clip, vol / _source.volume);
+                break;
+            }
+        }
     }
 }

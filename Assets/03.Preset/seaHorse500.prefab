@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: -8910319237814819736}
   - component: {fileID: 2650784713882536360}
   - component: {fileID: 3403813569985045743}
+  - component: {fileID: 7983674160229523066}
   m_Layer: 0
   m_Name: seaHorse500
   m_TagString: Fish
@@ -166,3 +167,15 @@ EdgeCollider2D:
   m_AdjacentEndPoint: {x: 0, y: 0}
   m_UseAdjacentStartPoint: 0
   m_UseAdjacentEndPoint: 0
+--- !u!114 &7983674160229523066
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5997402004711486779}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1fd9126ce5a9ef34c97af8749e29740c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

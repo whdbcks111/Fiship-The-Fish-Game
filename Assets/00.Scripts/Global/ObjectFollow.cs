@@ -11,18 +11,19 @@ public class ObjectFollow : MonoBehaviour
         get { return _target; }
         set { 
             _target = value;
-            _offset = transform.position - value.position;
-            Debug.Log(_offset);
+            if(value is not null) _offset = transform.position - value.position;
         }
     }
 
     private void Start()
     {
-        _offset = transform.position - _target.position;
+        if(target is not null)
+            _offset = transform.position - target.position;
     }
 
     private void Update()
     {
-        transform.position = target.position + _offset;
+        if (target is not null)
+            transform.position = target.position + _offset;
     }
 }

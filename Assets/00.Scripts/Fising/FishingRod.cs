@@ -28,56 +28,64 @@ public class FishingRod : MonoBehaviour
 
         currentVelocity = rigid.velocity.x;
 
-        CheckLimit();
-
         if (Input.GetKey(KeyCode.LeftArrow))
             MoveHorizontal(false);
         if (Input.GetKey(KeyCode.RightArrow))
             MoveHorizontal(true);
+
+
+        var left = ScreenRect.leftTop.x;
+        var right = ScreenRect.rightBottom.x;
+
+        if (transform.position.x < left)
+        {
+            var pos = transform.position;
+            pos.x = left;
+            transform.position = pos;
+            rigid.velocity = Vector2.zero;
+        }
+
+        if (transform.position.x > right)
+        {
+            var pos = transform.position;
+            pos.x = right;
+            transform.position = pos;
+            rigid.velocity = Vector2.zero;
+        }
     }
     public void MoveHorizontal(bool isRight)
     {
-        //'print("move horizontal");
 
-        int I = 0;
+        var axis = 0;
         if (isRight)
-            I = 1;
+            axis = 1;
         else
-            I = -1;
+            axis = -1;
 
 
         if (Mathf.Abs(currentVelocity) < MaxVelocity)
-        {
-            if (I == 1)
-                currentVelocity += mSpeed;
-            else
-                currentVelocity -= mSpeed;
-        }
+            currentVelocity += mSpeed * axis;
         else
-            currentVelocity = I * MaxVelocity;
+            currentVelocity = axis * MaxVelocity;
 
         rigid.velocity = new Vector2(currentVelocity, 0);
+    }
 
-    }
-    public void CheckLimit()
-    {
-        if (transform.position.x >= LimitLength)
-        {
-            rigid.velocity = Vector2.zero;
-            transform.position = new Vector2(LimitLength, transform.position.y);
-        }
-        else if (transform.position.x <= -LimitLength)
-        {
-            rigid.velocity = Vector2.zero;
-            transform.position = new Vector2(-LimitLength, transform.position.y);
-        }
-    }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Enemy"))
         {
             //장애물
-            GameManager.instance.RodDurability -= collision.GetComponent<ObjectInfo>().informationGet();
+            if (FishingManager.instance.invulnerableTimer <= 0)
+            {
+                var damage = collision.GetComponent<ObjectInfo>().informationGet();
+                GameManager.instance.RodDurability -= damage;
+
+                if(damage >= GameManager.instance.MaxRodDurability)
+                    SoundManager.instance.PlayAudio("Explode");
+                else
+                    SoundManager.instance.PlayAudio("gettrash");
+            }
             VelLoad = background.Stop();
 
             if(_eRecover is not null) StopCoroutine(_eRecover);
@@ -89,15 +97,35 @@ public class FishingRod : MonoBehaviour
         else if (collision.gameObject.CompareTag("Fish"))
         {
             //물고기
-            GameManager.instance.Score += Mathf.RoundToInt(
-                collision.GetComponent<ObjectInfo>().informationGet() 
+            var scoreAddition = Mathf.RoundToInt(
+                collision.GetComponent<ObjectInfo>().informationGet()
                     * (1 + GameManager.instance.EnhanceLevel * 0.05f)
                 );
+            if (FishingManager.instance.doubleScoreTimer > 0) scoreAddition *= 2;
+            scoreAddition = Mathf.RoundToInt(scoreAddition * (1 + FishingManager.instance.gameTime / 60 * 3));
+            GameManager.instance.Score += scoreAddition;
             collision.gameObject.transform.SetParent(null);
             collision.gameObject.AddComponent<ObjectFollow>().target = transform;
             collision.gameObject.tag = "Untagged";
+            StartCoroutine(ERemoveFish(collision.gameObject));
+
+            SoundManager.instance.PlayAudio("getfish");
+        }
+        else if (collision.gameObject.CompareTag("Item"))
+        {
+            //아아템
+            var item = collision.gameObject.GetComponent<Item>();
+            if (item is not null) item.OnTrigger();
+            FishingManager.instance.itemGenerator.Despawn(collision.gameObject);
         }
     }
+
+    IEnumerator ERemoveFish(GameObject fishObj)
+    {
+        yield return new WaitForSeconds(3f);
+        Destroy(fishObj);
+    }
+
     IEnumerator ERecover()
     {
         yield return new WaitForSeconds(0.1f);

@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: -8910319237814819736}
   - component: {fileID: -2558837086832019271}
   - component: {fileID: 2650784713882536360}
+  - component: {fileID: 3008132683206611711}
   m_Layer: 0
   m_Name: fish100
   m_TagString: Fish
@@ -155,3 +156,15 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
+--- !u!114 &3008132683206611711
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5997402004711486779}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1fd9126ce5a9ef34c97af8749e29740c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

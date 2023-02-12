@@ -18,7 +18,9 @@ public class ShipSceneManager : MonoBehaviour
 
     public void Enhance() {
         var cost = GameManager.instance.GetCost();
-        if(GameManager.instance.Point >= cost) {
+        if(GameManager.instance.Point >= cost)
+        {
+            SoundManager.instance.PlayAudio("lootEnhance");
             GameManager.instance.Point -= cost;
             var beforeMaxDur = GameManager.instance.MaxRodDurability;
             GameManager.instance.EnhanceLevel++;

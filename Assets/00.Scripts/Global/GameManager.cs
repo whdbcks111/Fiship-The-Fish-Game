@@ -21,7 +21,12 @@ public class GameManager : MonoBehaviour
         get { return EnhanceLevel * 10 + 100; }
     }
     [HideInInspector] public float RodDurability = 100;
-    [HideInInspector] public int EnhanceLevel = 0;
+    [HideInInspector] private int _enhanceLevel = 0;
+    [HideInInspector] public int EnhanceLevel
+    {
+        get { return _enhanceLevel; }
+        set { _enhanceLevel = value; }
+    }
 
     public bool isLogoShowing
     {
@@ -49,7 +54,6 @@ public class GameManager : MonoBehaviour
 
     private void Awake() {
         instance = this;
-        Debug.Log(EnhanceLevel);
         DontDestroyOnLoad(gameObject);
     }
 
@@ -60,7 +64,6 @@ public class GameManager : MonoBehaviour
 
     private void Update() {
 
-        Debug.Log(EnhanceLevel);
         if(!(_scoreText is null)) 
             _scoreText.SetText(String.Format("점수 : {0:00000000}", Score));
 
@@ -83,7 +86,7 @@ public class GameManager : MonoBehaviour
             _enhanceText.SetText("강화 정보 : " + EnhanceLevel + "강");
 
         if(_pointText is not null)
-            _pointText.SetText(String.Format("포인트 : {0:0}", Point));
+            _pointText.SetText(String.Format("{0:0}", Point));
 
         if(RodDurability <= 0) {
             GameManager.instance.ResetGame();

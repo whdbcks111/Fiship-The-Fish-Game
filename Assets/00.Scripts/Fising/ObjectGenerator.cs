@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class ObjectGenerator : MonoBehaviour
@@ -25,6 +26,7 @@ public class ObjectGenerator : MonoBehaviour
         while(true)
         {
             yield return null;
+            if(o.IsDestroyed()) yield break;
             if(DespawnCheck(o)) break;
         }
         pool.Despawn(o);
