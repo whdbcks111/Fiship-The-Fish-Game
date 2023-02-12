@@ -305,7 +305,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_TargetDisplay: 0
 --- !u!1 &375449472
 GameObject:
@@ -1321,6 +1321,5 @@ MonoBehaviour:
   _scoreText: {fileID: 872379969}
   _durabilityText: {fileID: 1758736618}
   _enhanceText: {fileID: 728413160}
-  _pointText: {fileID: 0}
-  _costInfoText: {fileID: 0}
+  _pointText: {fileID: 1510653967}
   _durabilityProgress: {fileID: 1331299660}

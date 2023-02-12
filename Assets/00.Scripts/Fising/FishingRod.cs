@@ -90,7 +90,9 @@ public class FishingRod : MonoBehaviour
         {
             //물고기
             GameManager.instance.Score += collision.GetComponent<ObjectInfo>().informationGet();
-            FishingManager.instance.fishGenerator.Despawn(collision.gameObject);
+            collision.gameObject.transform.SetParent(null);
+            collision.gameObject.AddComponent<ObjectFollow>().target = transform;
+            collision.gameObject.tag = "Untagged";
         }
     }
     IEnumerator ERecover()

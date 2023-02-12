@@ -14,8 +14,6 @@ public class FishingBackground : MonoBehaviour
         ChangeSpeed(.1f * Time.deltaTime);
     }
 
-
-
     public void ChangeSpeed(float speed)
     {
         drownPow += speed;
