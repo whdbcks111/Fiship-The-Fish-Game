@@ -1032,7 +1032,9 @@ MonoBehaviour:
   _presets:
   - {fileID: 5997402004711486779, guid: 0326c8185078b3c4fb32772879b47f8b, type: 3}
   - {fileID: 5997402004711486779, guid: 659fc23f17855dd4d96c337eaf31bd07, type: 3}
+  - {fileID: 5997402004711486779, guid: acff81bd6ee6c1c448908f4bc6f9235b, type: 3}
   - {fileID: 5997402004711486779, guid: 20ebf78027b571d45876f7af258d7f5f, type: 3}
+  - {fileID: 5997402004711486779, guid: ef96113b4babec94b9cb32a4d1dc7e46, type: 3}
   _container: {fileID: 107433406}
 --- !u!1 &1089670470
 GameObject:
