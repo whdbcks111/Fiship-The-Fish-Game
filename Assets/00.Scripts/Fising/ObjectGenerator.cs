@@ -7,6 +7,8 @@ public class ObjectGenerator : MonoBehaviour
     [SerializeField] GameObject[] _presets;
     [SerializeField] GameObject _container;
     private ObjectPool[] pools;
+    public delegate bool DespawnCheckDelegate(GameObject obj);
+    public DespawnCheckDelegate DespawnCheck = obj => false;
 
     // Start is called before the first frame update
     void Awake()
@@ -18,10 +20,14 @@ public class ObjectGenerator : MonoBehaviour
         }
     }
 
-    private IEnumerator EDespawn(int idx, GameObject o)
+    private IEnumerator EDespawn(ObjectPool pool, GameObject o)
     {
-        yield return new WaitForSeconds(5f);
-        pools[idx].Despawn(o);
+        while(true)
+        {
+            yield return null;
+            if(DespawnCheck(o)) break;
+        }
+        pool.Despawn(o);
     }
 
     public void Despawn(GameObject o)
@@ -29,21 +35,21 @@ public class ObjectGenerator : MonoBehaviour
         foreach(var pool in pools) pool.Despawn(o);
     }
 
-    public void Generate(int count)
+    public void Generate(int count, float yShake = 0)
     {
         Debug.Log("Generate");
-        var leftTop = Camera.main.ViewportToWorldPoint(new Vector3(0, 1));
-        var rightDown = Camera.main.ViewportToWorldPoint(new Vector3(1, 0));
+        var leftTop = ScreenRect.leftTop;
+        var rightBottom = ScreenRect.rightBottom;
 
         for (int i = 0; i < count; i++)
         {
             int poolIdx = Random.Range(0, pools.Length);
             var pool = pools[poolIdx];
 
-            var pos = new Vector3(Random.Range(leftTop.x, rightDown.x), rightDown.y - 1, 0);
+            var pos = new Vector3(Random.Range(leftTop.x, rightBottom.x), rightBottom.y - 1 - Random.Range(0, yShake), 0);
 
             var o = pool.Spawn(pos);
-            StartCoroutine(EDespawn(poolIdx, o));
+            StartCoroutine(EDespawn(pool, o));
         }
     }
 }

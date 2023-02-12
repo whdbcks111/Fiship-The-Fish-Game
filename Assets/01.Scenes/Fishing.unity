@@ -418,6 +418,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _presets: []
   _container: {fileID: 0}
+  _despawnTime: 20
 --- !u!114 &107433411
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -792,6 +793,7 @@ MonoBehaviour:
   _presets:
   - {fileID: 5997402004711486779, guid: cc31e92ae0eee8a4690e2a6caf60806b, type: 3}
   _container: {fileID: 107433406}
+  _despawnTime: 20
 --- !u!1 &698730840
 GameObject:
   m_ObjectHideFlags: 0
@@ -942,6 +944,7 @@ MonoBehaviour:
   _presets:
   - {fileID: 5997402004711486779, guid: 0326c8185078b3c4fb32772879b47f8b, type: 3}
   _container: {fileID: 107433406}
+  _despawnTime: 20
 --- !u!1 &1089670470
 GameObject:
   m_ObjectHideFlags: 0
@@ -1156,8 +1159,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fishGenerator: {fileID: 903810142}
   obstacleGenerator: {fileID: 680362157}
-  _generateSpan: 0.01
-  _generateChance: 0.1
+  _fishSpan: 0.1
+  _fishChance: 0.07
+  _obstacleSpan: 0.1
+  _obstacleChance: 0.1
 --- !u!1 &1495549412
 GameObject:
   m_ObjectHideFlags: 0

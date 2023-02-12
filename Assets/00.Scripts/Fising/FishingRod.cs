@@ -12,6 +12,8 @@ public class FishingRod : MonoBehaviour
     [SerializeField] float VelLoad;
     Rigidbody2D rigid;
     FishingBackground background;
+    private IEnumerator _eRecover;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -77,8 +79,10 @@ public class FishingRod : MonoBehaviour
             //장애물
             GameManager.instance.RodDurability -= collision.GetComponent<ObjectInfo>().informationGet();
             VelLoad = background.Stop();
-            StartCoroutine(ERecover());
 
+            if(_eRecover is not null) StopCoroutine(_eRecover);
+            _eRecover = ERecover();
+            StartCoroutine(_eRecover);
 
             FishingManager.instance.obstacleGenerator.Despawn(collision.gameObject);
         }

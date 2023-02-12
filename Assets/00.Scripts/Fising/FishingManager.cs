@@ -8,25 +8,35 @@ public class FishingManager : MonoBehaviour
 
     [SerializeField] public ObjectGenerator fishGenerator;
     [SerializeField] public ObjectGenerator obstacleGenerator;
-    [SerializeField] private float _generateSpan;
-    [SerializeField] private float _generateChance;
-    private float _timer = 0;
+    [SerializeField] private float _fishSpan;
+    [SerializeField] private float _fishChance;
+    [SerializeField] private float _obstacleSpan;
+    [SerializeField] private float _obstacleChance;
+    private float _fishTimer = 0;
+    private float _obstacleTimer = 0;
 
     private void Awake()
     {
         instance = this;
+        var leftTop = ScreenRect.leftTop;
+        fishGenerator.DespawnCheck = obj => obj.transform.position.y > leftTop.y + 1;
+        obstacleGenerator.DespawnCheck = obj => obj.transform.position.y > leftTop.y + 1;
     }
 
     private void Update()
     {
-        if((_timer -= Time.deltaTime) < 0)
+        if ((_obstacleTimer -= Time.deltaTime) < 0)
         {
-            _timer += _generateSpan;
-            if(Random.value < _generateChance)
-                obstacleGenerator.Generate(Random.Range(1, 3));
+            _obstacleTimer += _obstacleSpan;
+            if (Random.value < _obstacleChance)
+                obstacleGenerator.Generate(1, 0.3f);
+        }
 
-            if (Random.value < _generateChance)
-                fishGenerator.Generate(Random.Range(1, 3));
+        if ((_fishTimer -= Time.deltaTime) < 0)
+        {
+            _fishTimer += _fishSpan;
+            if (Random.value < _fishChance)
+                fishGenerator.Generate(1, 0.3f);
         }
     }
 }

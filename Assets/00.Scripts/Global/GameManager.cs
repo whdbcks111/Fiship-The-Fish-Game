@@ -23,11 +23,11 @@ public class GameManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _durabilityText;
     [SerializeField] private TextMeshProUGUI _enhanceText;
     [SerializeField] private TextMeshProUGUI _pointText;
-    [SerializeField] private TextMeshProUGUI _costInfoText;
     [SerializeField] private Image _durabilityProgress;
 
     public void ResetGame() {
         Point += Mathf.RoundToInt(Score * 0.01f);
+        Debug.Log(Point);
         Score = 0;
         RodDurability = MaxRodDurability;
     }
