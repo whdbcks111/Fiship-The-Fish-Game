@@ -12,7 +12,6 @@ public class FishingRod : MonoBehaviour
     [SerializeField] float VelLoad;
     Rigidbody2D rigid;
     FishingBackground background;
-    [SerializeField] FishingObstacleGenerate _generator;
     // Start is called before the first frame update
     void Start()
     {
@@ -76,22 +75,21 @@ public class FishingRod : MonoBehaviour
         if (collision.gameObject.CompareTag("Enemy"))
         {
             //장애물
-            GameManager.Instance.RodDurability -= collision.GetComponent<ObjectInfo>().informationGet();
+            GameManager.instance.RodDurability -= collision.GetComponent<ObjectInfo>().informationGet();
             VelLoad = background.Stop();
-            StartCoroutine(recover());
+            StartCoroutine(ERecover());
 
 
-            _generator.DespawnObstacle(collision.gameObject);
+            FishingManager.instance.obstacleGenerator.Despawn(collision.gameObject);
         }
         else if (collision.gameObject.CompareTag("Fish"))
         {
             //물고기
-            GameManager.Instance.Score += collision.GetComponent<ObjectInfo>().informationGet();
-
-            Destroy(collision.gameObject);
+            GameManager.instance.Score += collision.GetComponent<ObjectInfo>().informationGet();
+            FishingManager.instance.fishGenerator.Despawn(collision.gameObject);
         }
     }
-    IEnumerator recover()
+    IEnumerator ERecover()
     {
         yield return new WaitForSeconds(0.1f);
         background.ChangeSpeed(VelLoad * .1f);

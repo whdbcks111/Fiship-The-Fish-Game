@@ -8,29 +8,36 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager Instance;
+    public static GameManager instance;
 
+    public int Point = 0;
     public int Score = 0;
-    public float MaxRodDurability = 100;
+    public float MaxRodDurability
+    {
+        get { return (EnhanceLevel - 1) * 20 + 100; }
+    }
     public float RodDurability = 100;
     public int EnhanceLevel = 1;
     
     [SerializeField] private TextMeshProUGUI _scoreText;
     [SerializeField] private TextMeshProUGUI _durabilityText;
     [SerializeField] private TextMeshProUGUI _enhanceText;
+    [SerializeField] private TextMeshProUGUI _pointText;
     [SerializeField] private TextMeshProUGUI _costInfoText;
     [SerializeField] private Image _durabilityProgress;
 
     public void ResetGame() {
+        Point += Mathf.RoundToInt(Score * 0.01f);
+        Score = 0;
         RodDurability = MaxRodDurability;
     }
 
     public int GetCost() {
-        return EnhanceLevel * 200 + (int)Math.Pow(EnhanceLevel * 10, 1.4) + 100;
+        return EnhanceLevel * 100;
     }
 
     private void Awake() {
-        Instance = this;
+        instance = this;
         DontDestroyOnLoad(gameObject);
     }
 
@@ -53,11 +60,14 @@ public class GameManager : MonoBehaviour
             _durabilityProgress.fillAmount = ratio;
         }
 
-        if(!(_enhanceText is null)) 
+        if(_enhanceText is not null) 
             _enhanceText.SetText("강화 정보 : " + EnhanceLevel + "강");
 
+        if(_pointText is not null)
+            _pointText.SetText(String.Format("포인트 : {0:0}", Point));
+
         if(RodDurability <= 0) {
-            GameManager.Instance.ResetGame();
+            GameManager.instance.ResetGame();
             SceneManager.LoadScene("GameOverScene");
         }
     }

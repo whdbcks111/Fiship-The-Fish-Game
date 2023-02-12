@@ -6,21 +6,19 @@ using TMPro;
 public class ShipSceneManager : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI _costInfo;
-    
-    private float timer = 0;
 
     private void Awake() {
     }
 
     private void Update() {
-        if(_costInfo is not null) _costInfo.SetText(GameManager.Instance.GetCost().ToString() + "점 소모");
+        if(_costInfo is not null) _costInfo.SetText(GameManager.instance.GetCost().ToString() + "점 소모");
     }
 
     public void Enhance() {
-        var cost = GameManager.Instance.GetCost();
-        if(GameManager.Instance.Score >= cost) {
-            GameManager.Instance.Score -= cost;
-            GameManager.Instance.EnhanceLevel++;
+        var cost = GameManager.instance.GetCost();
+        if(GameManager.instance.Point >= cost) {
+            GameManager.instance.Point -= cost;
+            GameManager.instance.EnhanceLevel++;
         }
     }
 }
