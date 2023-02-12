@@ -6,12 +6,14 @@ using TMPro;
 public class ShipSceneManager : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI _costInfo;
+    [SerializeField] private GameObject _shipUI;
 
     private void Awake() {
     }
 
     private void Update() {
         if(_costInfo is not null) _costInfo.SetText(GameManager.instance.GetCost().ToString() + "점 소모");
+        _shipUI.SetActive(!GameManager.instance.isLogoShowing);
     }
 
     public void Enhance() {

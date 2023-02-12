@@ -89,7 +89,10 @@ public class FishingRod : MonoBehaviour
         else if (collision.gameObject.CompareTag("Fish"))
         {
             //물고기
-            GameManager.instance.Score += collision.GetComponent<ObjectInfo>().informationGet();
+            GameManager.instance.Score += Mathf.RoundToInt(
+                collision.GetComponent<ObjectInfo>().informationGet() 
+                    * (1 + GameManager.instance.EnhanceLevel * 0.05f)
+                );
             collision.gameObject.transform.SetParent(null);
             collision.gameObject.AddComponent<ObjectFollow>().target = transform;
             collision.gameObject.tag = "Untagged";
